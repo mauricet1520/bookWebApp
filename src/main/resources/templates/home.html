@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{{^user}}
+<form action="/login" method="post">
+    <input type="text" placeholder="Username" name="userName" required/>
+    <input type="password" placeholder="Password" name="password" required/>
+    <button type="submit">Login</button>
+</form>
+{{/user}}
+
+{{#user}}
+Welcome, {{name}}!
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+<br><br>
+
+...
+
+
+<a href="/">All</a>
+<a href="/?genre=fiction">Fiction</a>
+<a href="/?genre=non-fiction">Non-Fiction</a>
+<a href="/?genre=action-adventure">Action-Adventure</a>
+<a href="/?genre=horror">Horror</a>
+<a href="/">All</a>
+
+<form action="/searchByTitle" method="get">
+    <input type="text" placeholder="Search by Title" name="searchTitle"/>
+    <button type="submit">Search</button>
+</form>
+
+<form action="/searchByAuthor" method="get">
+    <input type="text" placeholder="Search by Author" name="searchAuthor"/>
+    <button type="submit">Search</button>
+</form>
+
+
+<br><br>
+
+
+<form action="/add-book" method="post">
+    <input type="text" placeholder="Name" name="bookTitle"/>
+    <input type="text" placeholder="Author" name="bookAuthor"/>
+
+    <select name = "bookGenre">
+        <option selected disabled></option>
+        <option value="fiction">Fiction</option>
+        <option value="non-fiction">Non-Fiction</option>
+        <option value="action-adventure">Action-Adventure</option>
+        <option value="horror">Horror</option>
+    </select>
+    <button type="submit">Add Book</button>
+
+
+</form>
+<ul>
+        {{#books}}
+<li>Title: {{title}} &nbsp; &nbsp;By: {{author}} &nbsp;&nbsp; Genre: {{genre}} &nbsp;&nbsp; IsCheckedOut:{{checkedOut}}&nbsp;&nbsp;
+    <a href="/delete?bookID={{id}}">delete</a>
+    &nbsp;&nbsp;<a href="/check_out?bookID={{id}}">Check Out</a>&nbsp;&nbsp;<a href="/check_in?bookID={{id}}">Check In</a></li>
+        {{/books}}
+
+</ul>
+
+{{/user}}
+
+</body>
+</html>
